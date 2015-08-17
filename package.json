@@ -1,0 +1,18 @@
+{
+  "name": "SphericGameOfLife",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "gulp-babel": "~5.2.0"
+  },
+  "devDependencies": {
+    "mocha": "~2.2.5",
+    "babel": "~5.8.21"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel/register"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}
