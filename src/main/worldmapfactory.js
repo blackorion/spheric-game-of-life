@@ -4,7 +4,7 @@ module.exports = class WorldMapFactory {
     static create(level = 0) {
         let triangles = WorldMapFactory.createDefaultTriangles();
 
-        if ( level === 1 )
+        if (level === 1)
             triangles = WorldMapFactory.divide(triangles);
 
         return new WorldMap(triangles);
@@ -75,7 +75,7 @@ module.exports = class WorldMapFactory {
     static divide(triangles) {
         let result = [];
 
-        for ( let triangle of triangles ) {
+        for (let triangle of triangles) {
             result.push(new Triangle(triangle.getRow(), triangle.getIndex()));
             result.push(new Triangle(triangle.getRow() + 1, triangle.getIndex()));
             result.push(new Triangle(triangle.getRow() + 1, triangle.getIndex() + 1));
@@ -86,7 +86,16 @@ module.exports = class WorldMapFactory {
     }
 
     static tessellate(triangle) {
+        var tesselatedElement = {
+            top: new Triangle,
+            bottom: new Triangle,
+            left: new Triangle,
+            right: new Triangle
+        };
 
+        tesselatedElement.top.setLinked("bottom", tesselatedElement.bottom);
+
+        return tesselatedElement
     }
 };
 
@@ -96,8 +105,8 @@ class WorldMap {
     }
 
     get(row, index) {
-        for ( let triangle of this.triangles )
-            if ( triangle.getRow() === row && triangle.getIndex() === index )
+        for (let triangle of this.triangles)
+            if (triangle.getRow() === row && triangle.getIndex() === index)
                 return triangle;
 
         throw new Error(`Element not found: ${row}:${index}`);
@@ -105,11 +114,5 @@ class WorldMap {
 
     size() {
         return this.triangles.length;
-    }
-}
-
-class TessellatedTriangle {
-    constructor() {
-
     }
 }

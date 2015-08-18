@@ -28,14 +28,20 @@ describe("WorldMapFactory", ()=> {
         });
     });
 
-    describe("tessellate a triangle", ()=> {
+    describe("when tessellating triangle", ()=> {
         it("should create 4 new triangles from single triangle", ()=> {
-            let triangledElelement = WorldMapFactory.tessellate(new Triangle);
+            let tessellatedElelement = WorldMapFactory.tessellate(new Triangle(""));
 
-            assert.equal(triangledElelement.left);
-            assert.equal(triangledElelement.left);
-            assert.equal(triangledElelement.left);
-            assert.equal(triangledElelement.left);
+            assert.notEqual(tessellatedElelement.left, undefined);
+            assert.notEqual(tessellatedElelement.right, undefined);
+            assert.notEqual(tessellatedElelement.top, undefined);
+            assert.notEqual(tessellatedElelement.bottom, undefined);
+        });
+
+        it("should link new triangles", ()=>{
+            var tessellatedElement = WorldMapFactory.tessellate(new Triangle());
+
+            assert.equal(tessellatedElement.top.linked("bottom"), tessellatedElement.bottom);
         });
     });
 });
