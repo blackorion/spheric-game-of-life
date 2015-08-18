@@ -1,7 +1,7 @@
 var assert = require("assert");
 
-import Game from '../main/game';
-import WorldMapFactory from '../main/worldmapfactory';
+import Game from '../../main/engine/game';
+import WorldMapFactory from '../../main/engine/worldmapfactory';
 
 describe("Game", ()=> {
     var worldMap;

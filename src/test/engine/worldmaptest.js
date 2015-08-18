@@ -1,6 +1,6 @@
-import WorldMap from '../main/woldmap'
-import WorldMapMapper from '../main/worldmapmapper'
-import Triangle from '../main/trianlge'
+import WorldMap from '../../main/engine/woldmap'
+import WorldMapMapper from '../../main/engine/worldmapmapper'
+import Triangle from '../../main/engine/trianlge'
 
 var assert = require('assert');
 

@@ -1,7 +1,7 @@
 var assert = require("assert");
 
-import WorldMapFactory from "../main/worldmapfactory";
-import Triangle from "../main/trianlge";
+import WorldMapFactory from "../../main/engine/worldmapfactory";
+import Triangle from "../../main/engine/trianlge";
 
 describe("WorldMapFactory", ()=> {
     describe("default world initialization", ()=> {
@@ -44,22 +44,4 @@ describe("WorldMapFactory", ()=> {
             assert.equal(tessellatedElement.top.linked("bottom"), tessellatedElement.bottom);
         });
     });
-});
-
-describe("Triangle", ()=> {
-    it("should set link for both directions", ()=> {
-        shouldLinkBothDirections("right", "left");
-        shouldLinkBothDirections("left", "right");
-        shouldLinkBothDirections("bottom", "top");
-        shouldLinkBothDirections("top", "bottom");
-    });
-
-    function shouldLinkBothDirections(setDirection, expectedDirection) {
-        let mainTriangle = new Triangle();
-        let linkedTriangle = new Triangle();
-
-        mainTriangle.setLinked(setDirection, linkedTriangle);
-
-        assert.equal(mainTriangle, linkedTriangle.linked(expectedDirection));
-    }
 });
