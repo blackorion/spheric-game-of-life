@@ -1,6 +1,17 @@
+import WorldMap from './woldmap'
 import Triangle from './trianlge'
 
 module.exports = class WorldMapFactory {
+    static generateRandom() {
+        let triangles = WorldMapFactory.createDefaultTriangles();
+
+        for(let triangle of triangles)
+            if (Math.random() > 0.5)
+                triangle.revive();
+
+        return new WorldMap(triangles);
+    }
+
     static create(level = 0) {
         let triangles = WorldMapFactory.createDefaultTriangles();
 
@@ -98,21 +109,3 @@ module.exports = class WorldMapFactory {
         return tesselatedElement
     }
 };
-
-class WorldMap {
-    constructor(triangles) {
-        this.triangles = triangles || [];
-    }
-
-    get(row, index) {
-        for (let triangle of this.triangles)
-            if (triangle.getRow() === row && triangle.getIndex() === index)
-                return triangle;
-
-        throw new Error(`Element not found: ${row}:${index}`);
-    }
-
-    size() {
-        return this.triangles.length;
-    }
-}

@@ -20,8 +20,8 @@ describe("WorldMapFactory", ()=> {
         });
     });
 
-    describe("creates configured level world map", ()=> {
-        it("should create a world with 80 triangles", ()=> {
+    describe("when creating configured level world map", ()=> {
+        it("should generate a world with 80 triangles with level one", ()=> {
             let world = WorldMapFactory.create(1);
 
             assert.equal(world.size(), 80);
