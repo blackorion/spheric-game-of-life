@@ -26,5 +26,5 @@ gulp.task('watch', function () {
 gulp.task('default', ['build', 'watch']);
 
 function on_error(err) {
-    console.log(err);
+    console.log(err.message);
 }

@@ -5,18 +5,27 @@ import Triangle from "../../main/engine/trianlge";
 
 describe("WorldMapFactory", ()=> {
     describe("default world initialization", ()=> {
-        it("creates world with 20 triangles", ()=> {
-            let map = WorldMapFactory.create();
+        let map;
 
+        beforeEach(()=> {
+            map = WorldMapFactory.create();
+        });
+
+        it("creates world with 20 triangles", ()=> {
             assert.equal(20, map.size());
         });
 
-        it("should have default triangles linked", ()=> {
-            let map = WorldMapFactory.create();
+        let defaultLinksTest = [
+            { triangle: 0, linkedTo: 1 },
+            { triangle: 0, linkedTo: 4 },
+            { triangle: 4, linkedTo: 0 },
+            { triangle: 0, linkedTo: 6 }
+        ];
 
-            assert.equal(map.get(0, 0).linked("right"), map.get(0, 1));
-            assert.equal(map.get(0, 0).linked("bottom"), map.get(1, 1));
-            assert.equal(map.get(0, 4).linked("right"), map.get(0, 0));
+        defaultLinksTest.forEach((test)=> {
+            it(`should have links between #${test.triangle} and #${test.linkedTo}`, ()=> {
+                assert.ok(map.get(test.triangle).getLinked().indexOf(map.get(test.linkedTo)) > -1);
+            });
         });
     });
 
@@ -25,23 +34,6 @@ describe("WorldMapFactory", ()=> {
             let world = WorldMapFactory.create(1);
 
             assert.equal(world.size(), 80);
-        });
-    });
-
-    describe("when tessellating triangle", ()=> {
-        it("should create 4 new triangles from single triangle", ()=> {
-            let tessellatedElelement = WorldMapFactory.tessellate(new Triangle(""));
-
-            assert.notEqual(tessellatedElelement.left, undefined);
-            assert.notEqual(tessellatedElelement.right, undefined);
-            assert.notEqual(tessellatedElelement.top, undefined);
-            assert.notEqual(tessellatedElelement.bottom, undefined);
-        });
-
-        it("should link new triangles", ()=>{
-            var tessellatedElement = WorldMapFactory.tessellate(new Triangle());
-
-            assert.equal(tessellatedElement.top.linked("bottom"), tessellatedElement.bottom);
         });
     });
 });

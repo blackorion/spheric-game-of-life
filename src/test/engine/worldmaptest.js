@@ -1,4 +1,4 @@
-import WorldMap from '../../main/engine/woldmap'
+import WorldMap from '../../main/engine/worldmap'
 import WorldMapMapper from '../../main/engine/worldmapmapper'
 import Triangle from '../../main/engine/trianlge'
 
@@ -6,13 +6,13 @@ var assert = require('assert');
 
 describe("WorldMap", ()=> {
     it("should create a deep copy of it self", ()=> {
-        let triangles = [new Triangle(0, 0), new Triangle(0, 1)];
-        triangles[0].setLinked("right", triangles[1]);
+        let triangles = [new Triangle, new Triangle];
+        triangles[0].addLink(triangles[1]);
+        triangles[1].addLink(triangles[0]);
         let worldMap = new WorldMap(triangles);
 
         let copy = worldMap.copy();
-
-        assert.equal(copy.get(0, 0).linked("right"), copy.get(0, 1));
+        assert.ok(copy.get(0).getLinked().indexOf(copy.get(1)) > -1);
     });
 
     it("should return an triangles array by default", ()=> {
